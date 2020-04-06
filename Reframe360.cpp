@@ -414,13 +414,6 @@ Reframe360::Reframe360(OfxImageEffectHandle p_Handle)
 
 void Reframe360::render(const OFX::RenderArguments& p_Args)
 {
-#ifdef BETA_FAIL
-	time_t time_ = time(NULL);
-
-	if (time_ > BETA_FAIL_TIME) {
-		return;
-	}
-#endif
     if ((m_DstClip->getPixelDepth() == OFX::eBitDepthFloat) && (m_DstClip->getPixelComponents() == OFX::ePixelComponentRGBA))
     {
         ImageScaler imageScaler(*this);
