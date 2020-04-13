@@ -5,13 +5,13 @@ NVCC = ${CUDAPATH}/bin/nvcc
 CXXFLAGS = -fvisibility=hidden -I../OpenFX-1.4/include -I../Support/include
 
 ifeq ($(UNAME_SYSTEM), Linux)
-	OPENCLPATH = /usr/local/cuda
-	CXXFLAGS += -I${OPENCLPATH}/include -fPIC
+	AMDAPP_PATH ?= /opt/AMDAPP
+	CXXFLAGS += -I${AMDAPP_PATH}/include -fPIC
 	NVCCFLAGS = --compiler-options="-fPIC"
-	LDFLAGS = -shared -fvisibility=hidden -L${CUDAPATH}/lib64 -lcuda -lcudart
+	LDFLAGS = -shared -fvisibility=hidden -L${CUDAPATH}/lib64 -lcuda -lcudart_static
 	BUNDLE_DIR = Reframe360.ofx.bundle/Contents/Linux-x86-64/
 else
-	LDFLAGS = -bundle -fvisibility=hidden -L${CUDAPATH}/lib -lcudart -F/Library/Frameworks -framework OpenCL -framework Metal -framework AppKit
+	LDFLAGS = -bundle -fvisibility=hidden -L${CUDAPATH}/lib -lcudart_static -F/Library/Frameworks -framework OpenCL -framework Metal -framework AppKit
 	BUNDLE_DIR = Reframe360.ofx.bundle/Contents/MacOS/
 	METAL_OBJ = MetalKernel.o
 endif
