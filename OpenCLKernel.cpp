@@ -21,8 +21,6 @@ void CheckError(cl_int p_Error, const char* p_Msg)
     if (p_Error != CL_SUCCESS)
     {
         fprintf(stderr, "%s [%d]\n", p_Msg, p_Error);
-    } else {
-        fprintf(stderr, "Everything was good: %s [%d]\n", p_Msg, p_Error);
     }
 }
 
